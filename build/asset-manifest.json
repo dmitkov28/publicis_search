@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/publicissearch/static/css/main.e6c13ad2.css",
+    "main.js": "/publicissearch/static/js/main.ba8f541c.js",
+    "static/media/walmart.svg": "/publicissearch/static/media/walmart.c4e76bdb0d66faefefee4b8fc5743f85.svg",
+    "static/media/target.svg": "/publicissearch/static/media/target.3923db5e7aa4a6a4f21a5c186c808db0.svg",
+    "static/media/amazon.svg": "/publicissearch/static/media/amazon.af6bd8591384cb35b48133e1f2e03cdc.svg",
+    "static/media/google.svg": "/publicissearch/static/media/google.66ae25beb1eb0655ac594978ee31ddb2.svg",
+    "static/media/youtube.svg": "/publicissearch/static/media/youtube.9e6e68bec2c1f5e29b3b54dc02f54c47.svg",
+    "index.html": "/publicissearch/index.html",
+    "main.e6c13ad2.css.map": "/publicissearch/static/css/main.e6c13ad2.css.map",
+    "main.ba8f541c.js.map": "/publicissearch/static/js/main.ba8f541c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.ba8f541c.js"
+  ]
+}
