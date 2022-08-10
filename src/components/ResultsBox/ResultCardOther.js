@@ -39,7 +39,7 @@ export default function ResultCard({ type, suggestions }) {
 function OtherCard({ suggestionType, suggestions }) {
     const [view, setView] = useState('list')
     const toggleView = (e, newValue) => {
-        setView(newValue)
+        newValue != null && setView(newValue)
     }
 
     return (
@@ -55,7 +55,7 @@ function OtherCard({ suggestionType, suggestions }) {
                 <Typography variant='subtitle1' fontWeight='bold' fontSize={20}>
                     {suggestionType}
                 </Typography>
-                
+
                 <ToggleButtonGroup
                     exclusive
                     value={view}
@@ -70,12 +70,10 @@ function OtherCard({ suggestionType, suggestions }) {
                 </ToggleButtonGroup>
             </Box>
             <Box>
-                {
-                    view == 'cloud'
-                        ? <WordCloud data={suggestions} />
-                        : <ul style={{ listStyle: 'none' }}>
-                            {suggestions.map((s, idx) => <li key={`${idx}_${s}`} style={{ marginTop: 15, marginBottom: 15 }}>{s}</li>)}
-                        </ul>
+                {view == 'cloud' && <WordCloud data={suggestions} />}
+                {view == 'list' && <ul style={{ listStyle: 'none' }}>
+                    {suggestions.map((s, idx) => <li key={`${idx}_${s}`} style={{ marginTop: 15, marginBottom: 15 }}>{s}</li>)}
+                </ul>
                 }
             </Box>
 

@@ -15,9 +15,9 @@ import { useState } from 'react';
 export default function ResultCardSuggestions({ type, suggestions }) {
     const [view, setView] = useState('list')
     const toggleView = (e, newValue) => {
-        setView(newValue)
+        newValue != null && setView(newValue)
     }
-    
+
     return (
         <Paper elevation={3} sx={{ p: 2, my: 3 }}>
             <Grid container spacing={3}>
@@ -44,12 +44,10 @@ export default function ResultCardSuggestions({ type, suggestions }) {
                                 </ToggleButton>
                             </ToggleButtonGroup>
                         </Box>
-                        {
-                            view == 'cloud'
-                                ? <WordCloud data={suggestions} />
-                                : <ul style={{ listStyle: 'none' }}>
-                                    {suggestions.map((s, idx) => <li key={`${idx}_${s}`} style={{ marginTop: 15, marginBottom: 15 }}>{s}</li>)}
-                                </ul>
+                        {view == 'cloud' && <WordCloud data={suggestions} />}
+                        {view == 'list' && <ul style={{ listStyle: 'none' }}>
+                            {suggestions.map((s, idx) => <li key={`${idx}_${s}`} style={{ marginTop: 15, marginBottom: 15 }}>{s}</li>)}
+                        </ul>
                         }
                     </Paper>
                 </Grid>
