@@ -2,8 +2,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
 import ImageIcon from '@mui/icons-material/Image';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import Masonry from '@mui/lab/Masonry';
@@ -37,8 +37,11 @@ export default function ResultCard({ type, suggestions }) {
 
 
 function OtherCard({ suggestionType, suggestions }) {
-    const [showWordCloud, setShowWordCloud] = useState(false)
-    
+    const [view, setView] = useState('list')
+    const toggleView = (e, newValue) => {
+        setView(newValue)
+    }
+
     return (
         <Paper sx={{ p: 2 }}>
             <Box sx={{
@@ -52,23 +55,28 @@ function OtherCard({ suggestionType, suggestions }) {
                 <Typography variant='subtitle1' fontWeight='bold' fontSize={20}>
                     {suggestionType}
                 </Typography>
-                <ButtonGroup onClick={() => setShowWordCloud(prevValue => !prevValue)} variant="outlined">
-                    <Button size='small'>
+                
+                <ToggleButtonGroup
+                    exclusive
+                    value={view}
+                    onChange={toggleView}
+                >
+                    <ToggleButton value='cloud'>
                         <ImageIcon />
-                    </Button>
-                    <Button>
+                    </ToggleButton>
+                    <ToggleButton value='list'>
                         <FormatListBulletedIcon />
-                    </Button>
-                </ButtonGroup>
+                    </ToggleButton>
+                </ToggleButtonGroup>
             </Box>
             <Box>
-            {
-                showWordCloud
-                    ? <WordCloud data={suggestions} />
-                : <ul style={{ listStyle: 'none' }}>
-                        {suggestions.map((s, idx) => <li key={`${idx}_${s}`} style={{ marginTop: 15, marginBottom: 15 }}>{s}</li>)}
-                    </ul>
-            }
+                {
+                    view == 'cloud'
+                        ? <WordCloud data={suggestions} />
+                        : <ul style={{ listStyle: 'none' }}>
+                            {suggestions.map((s, idx) => <li key={`${idx}_${s}`} style={{ marginTop: 15, marginBottom: 15 }}>{s}</li>)}
+                        </ul>
+                }
             </Box>
 
         </Paper>
