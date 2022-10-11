@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "natural-potion-357012",
+    "test": "search-intelligence-tool-test"
+  },
+  "targets": {},
+  "etags": {}
+}

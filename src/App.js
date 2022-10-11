@@ -1,26 +1,28 @@
-
-import SearchBox from './components/SearchBox/SearchBox';
-import ResultsContainer from './components/ResultsBox/ResultsContainer';
-import Navigation from './components/Navigation';
-import { useState } from 'react';
-import WordCloud from './components/WordCloud';
-
+import { Route, Routes } from 'react-router-dom';
+import KeywordSearch from './pages/KeywordSearch';
+import About from './pages/About';
+import Navigation from './components/common/nav/Navigation';
+import LoginPage from './pages/Login';
+import NotFound from './pages/NotFound';
+import ResetPassword from './pages/ResetPassword';
+import PrivateRoute from './components/RequireAuth';
 
 function App() {
-  const [search, setSearch] = useState(false)
-  const [queryData, setQueryData] = useState({
-    platform: '',
-    searchQuery: '',
-    language: '',
-    country: ''
-  })
-
+ 
   return (
     <>
-      <Navigation>
-      <SearchBox setSearch={setSearch} queryData={queryData} setQueryData={setQueryData} />
-      {search && <ResultsContainer queryData={queryData} search={search} setSearch={setSearch} />}
-      </Navigation> 
+    
+        <Routes>
+          <Route path='/' element={<PrivateRoute />}>
+            <Route path='/' element={<Navigation />}>
+              <Route path='/' element={<KeywordSearch />} />
+              <Route path='/use-cases' element={<About />} />
+              <Route path='*' element={<NotFound />} />
+            </Route>
+          </Route>
+          <Route path='login' element={<LoginPage />} />
+          <Route path='reset-password' element={<ResetPassword />} />
+        </Routes>
     </>
   );
 }

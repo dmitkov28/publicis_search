@@ -1,6 +1,12 @@
 async function request(url, options) {
     try {
         const res = await fetch(url, options)
+
+        if (res.status !== 200) {
+            const { message } = await res.json()
+            throw new Error(message)
+        }
+
         const result = await res.json()
         return result
 
@@ -10,18 +16,25 @@ async function request(url, options) {
 
 }
 
-function createOptions(method, data) {
-    const headers = {
+function createOptions(method, token, data) {
+    const options = {
         method,
+        headers: {}
     }
 
-    if (data != undefined) {
-        headers['Content-Type'] = 'application/json'
-        headers.body = JSON.stringify(data)
+    if (token) {
+        options.headers['Authorization'] = token
     }
+
+    if (data !== undefined) {
+        options.headers['Content-Type'] = 'application/json'
+        options.body = JSON.stringify(data)
+    }
+
+    return options
 }
 
 
-export async function get(url) {
-    return request(url, createOptions('get'))
+export async function get(url, token, data) {
+    return request(url, createOptions('get', token, data))
 }
