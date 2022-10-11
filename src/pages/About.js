@@ -48,7 +48,6 @@ export default function About() {
                         <li><b>Content Ideas: </b> WIRED's autocomplete interviews have generated millions of views on YouTube piggybacking on Google search suggestions</li>
                     </ul>
                 </Typography>
-                <Divider/>
                 <Typography variant='p' sx={{ mt: 8, lineHeight: 1.8, fontSize: '1.5rem' }}>
                     Additional resources:
                     <ul>
