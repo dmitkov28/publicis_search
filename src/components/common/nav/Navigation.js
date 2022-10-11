@@ -17,7 +17,7 @@ import ListItemText from '@mui/material/ListItemText';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import ScienceIcon from '@mui/icons-material/Science';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
-import AssessmentIcon from '@mui/icons-material/Assessment';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import NavMenu from './NavMenu';
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
@@ -97,7 +97,6 @@ export default function Navigation() {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate()
     const activePath = useLocation().pathname    
-
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -146,32 +145,20 @@ export default function Navigation() {
                         </ListItemIcon>
                         <ListItemText primary="Home" />
                     </ListItemButton>
-                    {/* <ListItemButton onClick={() => navigate('share-of-search')} selected={activePath === '/share-of-search'}>
-                        <ListItemIcon>
-                            <PieChartIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Share of Search"/>
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <AssessmentIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Reports" />
-                    </ListItemButton> */}
-                    {/* <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <IntegrationInstructionsIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="API" />
-                        </ListItemButton>
-                    </ListItem> */}
                     <ListItem disablePadding>
-                        <ListItemButton onClick={() => navigate('use-cases')}>
+                        <ListItemButton onClick={() => navigate('search-trends')} selected={activePath === '/search-trends'}>
+                            <ListItemIcon>
+                               <QueryStatsIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary="Search Trends" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => navigate('use-cases')} selected={activePath === '/use-cases'}>
                             <ListItemIcon>
                                 <ScienceIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Use Cases" />
+                            <ListItemText primary="Use Cases"/>
                         </ListItemButton>
                     </ListItem>
                 </List>
