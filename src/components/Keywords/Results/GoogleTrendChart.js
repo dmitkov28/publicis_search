@@ -5,7 +5,6 @@ import { SearchDataContext } from './ListItem';
 export const GoogleTrendChart = ({ keyword, country, dateRange }) => {
 
     const { searchData } = useContext(SearchDataContext)
-
     const data = searchData && [
         {
             "id": `"${keyword}"`,
@@ -14,13 +13,19 @@ export const GoogleTrendChart = ({ keyword, country, dateRange }) => {
     ]
 
     const chartTickValueOptions = {
-        'last_year': 'every month',
-        'last_month': 'every 7 days',
-        'last_week': 'every day'
+        'last_year': 'every 2 weeks',
+        'last_month': 'every 2 days',
+        'last_week': 'every 48 hours'
+    }
+
+    const xAxisFormat = {
+        'last_year': 'time:%b %d %Y %H:%M',
+        'last_month': 'time:%b %d %Y %H:%M',
+        'last_week': 'time:%H:%M',
+
     }
 
     const chartTickValues = chartTickValueOptions[dateRange]
-
 
     return (
         data &&
@@ -31,18 +36,17 @@ export const GoogleTrendChart = ({ keyword, country, dateRange }) => {
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
             xScale={{
                 type: "time",
-                format: "%b %d, %Y",
+                format: "%b %d, %Y %H:%M",
             }}
-            xFormat="time:%b %d %Y"
+            xFormat="time:%b %d %Y "
             yScale={{
                 type: 'linear',
                 min: '0',
                 max: '100',
             }}
-            yFormat=""
             axisBottom={{
                 format: "%b %d, %y",
-                tickValues: 'every day',
+                tickValues: chartTickValues,
                 tickRotation: -45,
                 legendOffset: -12
             }}

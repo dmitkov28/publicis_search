@@ -10,7 +10,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ParaglidingIcon from '@mui/icons-material/Paragliding';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../SuggestionsFinder";
 import { LANGUAGES, countryNames, amazonCountries, ebayCountries } from "../../../settings";
 import { CompareModeContext } from "../../../pages/KeywordSearch";
@@ -21,6 +21,7 @@ import { get } from "../../../api/api";
 export default function Form({ formFields }) {
     const { state, dispatch, getData, setData, setIsError, data } = useContext(DataContext)
     const { compareMode, setCompareMode } = useContext(CompareModeContext)
+    const [resetSearch, setResetSearch] = useState(false)
 
     const countryOptions = {
         all: countryNames,
@@ -29,12 +30,14 @@ export default function Form({ formFields }) {
     }
 
     const handleChange = (e) => {
-        dispatch({ type: 'SET_FORM', payload: { ...state.form, [e.target.name]: e.target.value } })
+        dispatch({ type: 'SET_FORM', payload: { ...state.form, [e.target.name]: e.target.value }})
+        setResetSearch(true)
     }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setResetSearch(false)
         dispatch({ type: 'SET_HAS_SEARCHED', payload: true })
         setIsError(false)
 
@@ -122,7 +125,7 @@ export default function Form({ formFields }) {
                     color="primary"
                     startIcon={state.hasSearched && state.data ? <AutorenewRoundedIcon /> : <SearchIcon />}
                 >
-                    {state.hasSearched && state.data ? 'Refresh' : 'Search'}
+                    {state.hasSearched && state.data && !resetSearch ? 'Refresh' : 'Search'}
                 </Button>
             </Grid>
             {

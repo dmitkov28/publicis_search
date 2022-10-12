@@ -213,7 +213,7 @@ export default function SuggestionsFinder() {
     })
 
     const { data, getData, isFetching, isError, setIsError, setData } = useFetch(state, dispatch)
-    console.log(state.data)
+
     return (
         <>
             <DataContext.Provider value={{ state, dispatch, tabs, getData, setData, setIsError, data }}>

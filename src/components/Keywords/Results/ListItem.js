@@ -2,30 +2,30 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import { createContext, useContext, useState } from "react"
 import { DataContext } from "../SuggestionsFinder"
 import Chip from '@mui/material/Chip';
-// import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import { nFormatter } from "../../../utils/numberFormatter";
-// import { GoogleModal } from "./GoogleModal";
-// import { useFetchSearchVolume } from "../../../hooks/useFetchSearchVolume";
+import { GoogleModal } from "./GoogleModal";
+import { useFetchSearchVolume } from "../../../hooks/useFetchSearchVolume";
 
 export const SearchDataContext = createContext()
 
 
 export default function ListItem({ modifier_type, modifier_keyword, suggestion }) {
     const [hovered, setHovered] = useState(false)
-    // const [modalOpened, setModalOpened] = useState(false)
+    const [modalOpened, setModalOpened] = useState(false)
 
     const { state, dispatch } = useContext(DataContext)
     const { data } = state.data
     const { platform } = state.data && state.data.query
-    
-    //TODO - FIX 👇 
-    const country = state.data && state.platform == 'google' || state.platform == 'youtube' && (state.data.query.country).toUpperCase()
-    // const { isFetching, isError, data: searchData, getData, setData } = useFetchSearchVolume()
 
-    // const openModal = () => {
-    //     setModalOpened(true)
-    //     getData(suggestion, country, 'last_year')
-    // }
+    //TODO - FIX 👇 
+    const country = (state.data && state.platform == 'google' || state.platform == 'youtube') && (state.data.query.country).toUpperCase()
+    const { isFetching, isError, data: searchData, getData, setData } = useFetchSearchVolume()
+
+    const openModal = () => {
+        setModalOpened(true)
+        getData(suggestion, country, 'last_year')
+    }
 
     const deleteItem = () => {
         dispatch({ type: 'SET_DATA', payload: { ...state.data, data: { ...state.data.data, [modifier_type]: { ...state.data.data[modifier_type], [modifier_keyword]: [...state.data.data[modifier_type][modifier_keyword]].filter(x => x != suggestion) } } } })
@@ -74,6 +74,18 @@ export default function ListItem({ modifier_type, modifier_keyword, suggestion }
                 {
                     hovered &&
                     <>
+                        <TrendingUpIcon
+                            onClick={openModal}
+                            fontSize="small"
+                            sx={{
+                                color: 'text.secondary',
+                                p: 0,
+                                m: 0,
+                                position: 'absolute',
+                                right: 35,
+                                cursor: 'pointer'
+                            }}
+                        />
                         <DeleteIcon
                             onClick={deleteItem}
                             fontSize="small"
@@ -89,11 +101,11 @@ export default function ListItem({ modifier_type, modifier_keyword, suggestion }
                     </>
                 }
             </li>
-            {/* {['google', 'youtube'].includes(state.platform) &&
+            {['google', 'youtube'].includes(state.platform) &&
                 <SearchDataContext.Provider value={{ searchData, isFetching, isError, getData, setData }}>
                     <GoogleModal modalOpened={modalOpened} setModalOpened={setModalOpened} keyword={suggestion} country={country} initialData={'hello'} />
                 </SearchDataContext.Provider>
-            } */}
+            }
         </>
 
     )
