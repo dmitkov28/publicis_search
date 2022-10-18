@@ -16,15 +16,23 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import ScienceIcon from '@mui/icons-material/Science';
+import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import NavMenu from './NavMenu';
 import HomeIcon from '@mui/icons-material/Home';
+import FolderIcon from '@mui/icons-material/Folder';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { useState } from 'react';
+import Collapse from '@mui/material/Collapse';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import StarBorder from '@mui/icons-material/StarBorder';
 
 
-const drawerWidth = 240;
+const drawerWidth = 270;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -96,13 +104,18 @@ export default function Navigation() {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const navigate = useNavigate()
-    const activePath = useLocation().pathname    
+    const activePath = useLocation().pathname
     const handleDrawerOpen = () => {
         setOpen(true);
     };
 
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+
+    const [itemExpanded, setItemExpanded] = useState(true)
+    const expandNestedItem = () => {
+        setItemExpanded(!itemExpanded);
     };
 
     return (
@@ -138,17 +151,35 @@ export default function Navigation() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List sx={{pt: 0}}>
-                    <ListItemButton disableRipple onClick={() => navigate('/')} selected={activePath === '/'}>
+                <List sx={{ pt: 0 }}>
+                    <ListItemButton onClick={expandNestedItem} disableRipple>
                         <ListItemIcon>
-                            <HomeIcon />
+                            <ScreenSearchDesktopIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Home" />
+                        <ListItemText primary="Search Suggestions" />
+                        {itemExpanded ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
+                    <Collapse in={itemExpanded} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItemButton sx={{ pl: 3 }} onClick={() => navigate('/explore-suggestions')} selected={activePath === '/explore-suggestions'}>
+                                <ListItemIcon>
+                                    <TravelExploreIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Explore Suggestions" />
+                            </ListItemButton>
+                            <ListItemButton sx={{ pl: 3 }} onClick={() => navigate('/saved-keywords')} selected={activePath === '/saved-keywords'}>
+                                <ListItemIcon>
+                                    <FolderIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Saved Keywords" />
+                            </ListItemButton>
+                        </List>
+                    </Collapse>
+
                     <ListItem disablePadding>
                         <ListItemButton onClick={() => navigate('search-trends')} selected={activePath === '/search-trends'}>
                             <ListItemIcon>
-                               <QueryStatsIcon/>
+                                <QueryStatsIcon />
                             </ListItemIcon>
                             <ListItemText primary="Search Trends" />
                         </ListItemButton>
@@ -158,13 +189,13 @@ export default function Navigation() {
                             <ListItemIcon>
                                 <ScienceIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Use Cases"/>
+                            <ListItemText primary="Use Cases" />
                         </ListItemButton>
                     </ListItem>
                 </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3, mt: '64px'}}>
-               <Outlet />
+            <Box component="main" sx={{ flexGrow: 1, p: 3, mt: '64px' }}>
+                <Outlet />
             </Box>
         </Box>
     );

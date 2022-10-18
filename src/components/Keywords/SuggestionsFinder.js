@@ -20,6 +20,7 @@ import { logos } from "../../settings";
 export const tabs = [
     {
         platform: 'google',
+        displayName: 'Google',
         image: logos.google,
         formFields: {
             'country': { width: 6 },
@@ -31,6 +32,7 @@ export const tabs = [
     },
     {
         platform: 'youtube',
+        displayName: 'YouTube',
         image: logos.youtube,
         formFields: {
             'country': { width: 6 },
@@ -43,6 +45,7 @@ export const tabs = [
     },
     {
         platform: 'duckduckgo',
+        displayName: 'DuckDuckGo',
         image: logos.duckduckgo,
         formFields: {
             'language': { width: 12 },
@@ -53,6 +56,7 @@ export const tabs = [
     },
     {
         platform: 'bing',
+        displayName: 'Bing',
         image: logos.bing,
         formFields: {
             'country': { width: 6 },
@@ -64,6 +68,7 @@ export const tabs = [
     },
     {
         platform: 'yahoo',
+        displayName: 'Yahoo',
         image: logos.yahoo,
         formFields: {
             'country': { width: 6 },
@@ -76,6 +81,7 @@ export const tabs = [
 
     {
         platform: 'amazon',
+        displayName: 'Amazon',
         image: logos.amazon,
         formFields: {
             'country': { width: 12 },
@@ -87,6 +93,7 @@ export const tabs = [
     },
     {
         platform: 'ebay',
+        displayName: 'Ebay',
         image: logos.ebay,
         formFields: {
             'country': { width: 12, filter: true },
@@ -97,6 +104,7 @@ export const tabs = [
     },
     {
         platform: 'walmart',
+        displayName: 'Walmart',
         image: logos.walmart,
         requiredFields: ['query'],
         formFields: {
@@ -105,6 +113,7 @@ export const tabs = [
     },
     {
         platform: 'target',
+        displayName: 'Target',
         image: logos.target,
         requiredFields: ['query'],
         formFields: {
@@ -113,6 +122,7 @@ export const tabs = [
     },
     {
         platform: 'instagram',
+        displayName: 'Instagram',
         image: logos.instagram,
         requiredFields: ['query'],
         formFields: {
@@ -122,6 +132,7 @@ export const tabs = [
     },
     {
         platform: 'twitter',
+        displayName: 'Twitter',
         image: logos.twitter,
         requiredFields: ['query'],
         formFields: {
@@ -132,6 +143,7 @@ export const tabs = [
     },
     {
         platform: 'tiktok',
+        displayName: 'TikTok',
         image: logos.tiktok,
         requiredFields: ['query'],
         formFields: {
@@ -142,6 +154,7 @@ export const tabs = [
     },
     {
         platform: 'pinterest',
+        displayName: 'Pinterest',
         image: logos.pinterest,
         requiredFields: ['query', 'language'],
         formFields: {

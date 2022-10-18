@@ -38,3 +38,7 @@ function createOptions(method, token, data) {
 export async function get(url, token, data) {
     return request(url, createOptions('get', token, data))
 }
+
+export async function post(url, token, data) {
+    return request(url, createOptions('post', token, data))
+}

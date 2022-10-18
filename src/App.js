@@ -7,6 +7,7 @@ import LoginPage from './pages/Login';
 import NotFound from './pages/NotFound';
 import ResetPassword from './pages/ResetPassword';
 import PrivateRoute from './components/RequireAuth';
+import SavedKeywords from './pages/SavedKeywords/SavedKeywords';
 
 function App() {
 
@@ -16,7 +17,9 @@ function App() {
       <Routes>
         <Route path='/' element={<PrivateRoute />}>
           <Route path='/' element={<Navigation />}>
-            <Route path='/' element={<KeywordSearch />} />
+            <Route path='/explore-suggestions' element={<KeywordSearch />} />
+            <Route path='/saved-keywords' element={<SavedKeywords />} />
+            <Route path='/saved-keywords/:keyword/:platform' element={<SavedKeywords />} />
             <Route path='/search-trends' element={<SearchTrendsPage />} />
             <Route path='/use-cases' element={<About />} />
             <Route path='*' element={<NotFound />} />

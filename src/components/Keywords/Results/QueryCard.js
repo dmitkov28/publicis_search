@@ -7,16 +7,19 @@ import Button from '@mui/material/Button';
 import SaveIcon from '@mui/icons-material/Save';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { CSVLink } from "react-csv";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../SuggestionsFinder";
 import { CompareModeContext } from "../../../pages/KeywordSearch";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useMediaQuery, useTheme } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import LoadingButton from '@mui/lab/LoadingButton';
 import Box from "@mui/material/Box";
+import CheckIcon from '@mui/icons-material/Check';
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
 import { logos } from "../../../settings";
 import { useFetch } from "../../../hooks/useFetch";
+import { postSuggestions } from "../../../api/data";
 
 export default function QueryCard() {
 
@@ -28,6 +31,17 @@ export default function QueryCard() {
     const theme = useTheme()
     const isMd = useMediaQuery(theme.breakpoints.down('md'))
     const alignTitle = compareMode || isMd ? 'center' : 'flex-start'
+
+    const [saved, setIsSaved] = useState(false)
+    const[isSaving, setIsSaving] = useState(false)
+
+    const saveData = async () => {
+     
+        setIsSaving(true)
+        await postSuggestions({ query, language, country, platform, data })
+        setIsSaving(false)
+        setIsSaved(true)
+    }
 
 
     const dateObj = new Date(date)
@@ -42,13 +56,13 @@ export default function QueryCard() {
         'pinterest': ['Platform', 'Modifier Type', 'Modifier', 'Suggestion', 'Language', 'Seed Keyword'],
         'twitter': ['Platform', 'Topic', 'Additional Details', 'Seed Keyword'],
         'instagram': ['Platform', 'Hashtag', 'Number of Posts', 'Seed Keyword'],
-    } 
-    
+    }
+
     const csvData = data && {
-        headers: [`${query || ''} ${language || ''} ${country || ''} ${formattedDate}`], 
+        headers: [`${query || ''} ${language || ''} ${country || ''} ${formattedDate}`],
         data: [
-            
-            !(platform in firstRow) 
+
+            !(platform in firstRow)
                 ? ['Platform', 'Modifier Type', 'Modifier', 'Suggestion', 'Language', 'Country', 'Seed Keyword']
                 : firstRow[platform]
             ,
@@ -58,20 +72,20 @@ export default function QueryCard() {
     Object.entries(data).forEach(([modifier_type, items]) => {
         Object.entries(items).forEach(([modifier_keyword, items]) => {
             let list;
-            
+
             items.forEach(item => {
-                if (platform === 'twitter'){
+                if (platform === 'twitter') {
                     list = [platform, item?.item, item?.details, query]
-                } else if (platform == 'instagram'){
+                } else if (platform == 'instagram') {
                     list = [platform, Object.keys(item)[0], Object.values(item)[0], query]
-                } else if (platform == 'pinterest' || platform == 'duckduckgo'){
+                } else if (platform == 'pinterest' || platform == 'duckduckgo') {
                     list = [platform, modifier_type, modifier_keyword, item, language, query]
-                } else if (platform == 'tiktok' || platform == 'walmart' || platform == 'target'){
+                } else if (platform == 'tiktok' || platform == 'walmart' || platform == 'target') {
                     list = [platform, modifier_type, modifier_keyword, item, query]
-                } else if (platform == 'amazon' || platform == 'ebay'){
+                } else if (platform == 'amazon' || platform == 'ebay') {
                     list = [platform, modifier_type, modifier_keyword, item, country, query]
                 }
-                 else {
+                else {
                     list = [platform, modifier_type, modifier_keyword, item, language, country, query]
                 }
 
@@ -152,9 +166,12 @@ export default function QueryCard() {
                             </CSVLink>
                         </Grid>
 
-                        {/* <Grid item>
-                            <Button variant="contained" size="small" startIcon={<SaveIcon />}>Save</Button>
-                        </Grid> */}
+                        <Grid item>
+                            {/* <Button onClick={saveData} variant="contained" size="small" startIcon={<SaveIcon />}>Save</Button> */}
+                            <LoadingButton disabled={saved} loading={isSaving} loadingIndicator='Saving...' onClick={saveData} size="small" startIcon={saved ? <CheckIcon /> : <SaveIcon />} variant="contained">
+                                {saved ? 'Saved' : 'Save'}
+                            </LoadingButton>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Paper>

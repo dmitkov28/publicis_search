@@ -1,4 +1,4 @@
-import { get } from './api';
+import { get, post } from './api';
 import { auth } from '../firebase.config';
 import { env } from '../settings';
 
@@ -14,7 +14,8 @@ const host = hosts[env]
 const endpoints = {
     getSuggestions: (platform, query) => `/${platform}/${query}`,
     getInstagramHashtags: (query) => `/instagram/${query}`,
-    getSearchVolume: (query, country, dateRange) => `/search_volume/${query}/${country}/${dateRange}`
+    getSearchVolume: (query, country, dateRange) => `/search_volume/${query}/${country}/${dateRange}`,
+    getAllSaved: '/db/get-all'
 }
 
 export async function getSuggestions(params) {
@@ -48,4 +49,29 @@ export async function getSearchVolume({ query, country, dateRange }) {
     const token = 5
     return get(url, token)
 }
+
+
+export async function getAllSaved(){
+    const url = host + endpoints.getAllSaved
+    const token = 5
+    return get(url, token)
+}
+
+export async function postSuggestions(params){
+    const { platform, query, country, language, data } = params
+    const token = await auth.currentUser.getIdToken()
+
+    let url = host + endpoints.getSuggestions(platform, query)
+
+    if (language && platform !== 'walmart' && platform !== 'target' && platform !== 'amazon') {
+        url += `/${language}`
+    }
+
+    if (country && platform !== 'walmart' && platform !== 'target') {
+        url += `/${country}`
+    }
+    
+    return post(url, token, data)
+}
+
 
