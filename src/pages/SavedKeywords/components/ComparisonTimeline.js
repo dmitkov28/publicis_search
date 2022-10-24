@@ -43,7 +43,7 @@ export default function ComparisonTimeline() {
                     <TimelineConnector />
                 </TimelineSeparator>
                 <TimelineContent>
-                    <Paper sx={{ width: '70%', p: 3, display: 'flex', justifyContent: 'space-evenly' }}>
+                    <Paper sx={{ width: '70%', p: 3, display: 'flex', justifyContent: 'space-evenly' }} elevation={3}>
                         Started tracking keyword.
                         {/* <List>
                             <ListItem>
@@ -104,7 +104,7 @@ export default function ComparisonTimeline() {
                     <TimelineConnector />
                 </TimelineSeparator>
                 <TimelineContent>
-                    <Paper sx={{ width: '70%', p: 3, display: 'flex', justifyContent: 'space-evenly' }}>
+                    <Paper sx={{ width: '70%', p: 3, display: 'flex', justifyContent: 'space-evenly' }} elevation={3}>
                         <List>
                             <ListItem>
                                 <ListItemText
@@ -164,7 +164,7 @@ export default function ComparisonTimeline() {
                     <TimelineConnector />
                 </TimelineSeparator>
                 <TimelineContent>
-                    <Paper sx={{ width: '70%', p: 3, display: 'flex', justifyContent: 'space-evenly' }}>
+                    <Paper sx={{ width: '70%', p: 3, display: 'flex', justifyContent: 'space-evenly' }} elevation={3}>
                         <List>
                             <ListItem>
                                 <ListItemText

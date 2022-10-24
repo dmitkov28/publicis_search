@@ -4,6 +4,9 @@ import Box from '@mui/material/Box';
 import { useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
+import Slide from "@mui/material/Slide";
+import Container from "@mui/material/Container";
+import Alert from "@mui/material/Alert";
 import Link from '@mui/material/Link';
 import KeywordSearch from '../../KeywordSearch';
 
@@ -23,9 +26,9 @@ export default function ReportsTable() {
     const { isFetching, isError, data, getData } = useFetchFromDB()
     const navigate = useNavigate()
 
-    useEffect(
-        () => getData,
-        [])
+    // useEffect(() => {
+    //     getData()
+    // }, [])
 
 
     return (
@@ -36,9 +39,17 @@ export default function ReportsTable() {
                     <CircularProgress />
                 </Box>
             }
-
+            {!data && 
+                  <Container sx={{ mt: 5, height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+                  <Slide direction="up" in={true} timeout={1200} mountOnEnter unmountOnExit>
+                      <Alert sx={{ width: '100%' }} severity="error">There was a problem connecting to the database. Try again later.</Alert>
+                  </Slide>
+              </Container>
+            }
+            
             {data &&
                 <DataGrid
+                    autoHeight={true}
                     rows={data.data}
                     columns={columns}
                     pageSize={10}
@@ -48,7 +59,7 @@ export default function ReportsTable() {
                     onCellClick={item => {
                         const { keyword, platform, country, language } = item.row
                         let timelineUrl = `/saved-keywords/${keyword}/${platform}`
-                        
+
                         const queryParams = {}
                         if (country) {
                             queryParams['country'] = country
@@ -63,7 +74,7 @@ export default function ReportsTable() {
                             const [firstKey, firstValue] = params.shift()
                             console.log(firstKey, firstValue)
                             timelineUrl += `?${firstKey}=${firstValue}`
-                            params.forEach(([k, v]) =>  timelineUrl += `&${k}=${v}`)
+                            params.forEach(([k, v]) => timelineUrl += `&${k}=${v}`)
                         }
 
                         navigate(timelineUrl)
