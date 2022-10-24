@@ -15,6 +15,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
+import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
 import { logos } from "../../../settings";
 import { useFetch } from "../../../hooks/useFetch";
 
@@ -138,7 +139,7 @@ export default function QueryCard() {
 
                     <Grid container sm={12} md={6} lg={compareMode ? 12 : 6} item spacing={1} sx={{ justifyContent: compareMode || isMd ? 'center' : 'flex-end' }}>
                         {/* <Grid item >
-                            <Button variant="outlined" size="small" startIcon={<SmartToyIcon />}>Analyze</Button>
+                            <Button variant="outlined" size="small" startIcon={<TroubleshootIcon />}>Analyze</Button>
                         </Grid> */}
                         <Grid item>
                             <CSVLink
