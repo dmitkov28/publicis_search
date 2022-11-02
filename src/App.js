@@ -20,6 +20,7 @@ function App() {
             <Route path='/explore-suggestions' element={<KeywordSearch />} />
             <Route path='/saved-keywords' element={<SavedKeywords />} />
             <Route path='/saved-keywords/:keyword/:platform' element={<SavedKeywords />} />
+            <Route path='/saved-keywords/:keyword/:platform/data' element={<SavedKeywords />} />
             <Route path='/search-trends' element={<SearchTrendsPage />} />
             <Route path='/use-cases' element={<About />} />
             <Route path='*' element={<NotFound />} />

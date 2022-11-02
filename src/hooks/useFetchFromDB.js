@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getAllSaved } from "../api/data"
+import { getTimelinesByUser } from "../api/data"
 
 
 export const useFetchFromDB = () => {
@@ -7,11 +7,11 @@ export const useFetchFromDB = () => {
     const [isError, setIsError] = useState(false)
     const [data, setData] = useState(null)
 
-    const getData = async () => {
+    const getData = async (userId) => {
         setIsFetching(true)
 
         try {
-            const result = await getAllSaved()
+            const result = await getTimelinesByUser(userId)
             setData(result)
 
         } catch (err) {

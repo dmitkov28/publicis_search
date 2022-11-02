@@ -16,13 +16,15 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 
 export default function ComparisonTimeline() {
     const [params] = useSearchParams()
     const country = params.get('country')
     const language = params.get('language')
-    
+
     return (
         <Timeline
             sx={{
@@ -33,10 +35,19 @@ export default function ComparisonTimeline() {
         >
             <TimelineItem>
                 <TimelineOppositeContent color="textSecondary">
-                    <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'right' }}>
-                        <CalendarMonthIcon sx={{ mr: 1 }} />
-                        16 Oct, 2022
-                    </Typography>
+                    <Link
+                        to={'#'}
+                        style={{
+                            textDecoration: 'none',
+                        }}
+                    >
+                        <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'right' }}>
+
+                            <CalendarMonthIcon sx={{ mr: 1 }} />
+                            16 Oct, 2022
+
+                        </Typography>
+                    </Link>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
                     <TimelineDot />
@@ -133,8 +144,8 @@ export default function ComparisonTimeline() {
                                     </Box>}>
                                 </ListItemText>
                             </ListItem>
-                        </List> 
-                         <List>
+                        </List>
+                        <List>
                             <ListItem>
                                 <ListItemText
                                     primary=
@@ -184,8 +195,8 @@ export default function ComparisonTimeline() {
                                     </Box>}>
                                 </ListItemText>
                             </ListItem>
-                        </List> 
-                         <List>
+                        </List>
+                        <List>
                             <ListItem>
                                 <ListItemText
                                     primary=
@@ -212,6 +223,6 @@ export default function ComparisonTimeline() {
                     </Paper>
                 </TimelineContent>
             </TimelineItem>
-        </Timeline>
+        </Timeline >
     )
 }

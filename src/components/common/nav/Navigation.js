@@ -16,7 +16,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import ScienceIcon from '@mui/icons-material/Science';
-import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
+import ScreenSearchDesktop from '@mui/icons-material/ScreenSearchDesktop';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import NavMenu from './NavMenu';
@@ -154,7 +154,7 @@ export default function Navigation() {
                 <List sx={{ pt: 0 }}>
                     <ListItemButton onClick={expandNestedItem} disableRipple>
                         <ListItemIcon>
-                            <ScreenSearchDesktopIcon />
+                            <ScreenSearchDesktop/>
                         </ListItemIcon>
                         <ListItemText primary="Search Suggestions" />
                         {itemExpanded ? <ExpandLess /> : <ExpandMore />}

@@ -17,7 +17,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import Box from "@mui/material/Box";
 import CheckIcon from '@mui/icons-material/Check';
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
-import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { logos } from "../../../settings";
 import { useFetch } from "../../../hooks/useFetch";
 import { postSuggestions } from "../../../api/data";
@@ -153,7 +153,7 @@ export default function QueryCard() {
 
                     <Grid container sm={12} md={6} lg={compareMode ? 12 : 6} item spacing={1} sx={{ justifyContent: compareMode || isMd ? 'center' : 'flex-end' }}>
                         <Grid item >
-                            <Button variant="outlined" size="small" startIcon={<AutorenewRoundedIcon />}>Track</Button>
+                            <Button variant="outlined" size="small" startIcon={<RemoveRedEyeIcon />}>Track</Button>
                         </Grid>
                         <Grid item>
                             <CSVLink

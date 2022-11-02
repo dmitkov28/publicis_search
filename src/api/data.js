@@ -15,7 +15,7 @@ const endpoints = {
     getSuggestions: (platform, query) => `/${platform}/${query}`,
     getInstagramHashtags: (query) => `/instagram/${query}`,
     getSearchVolume: (query, country, dateRange) => `/search_volume/${query}/${country}/${dateRange}`,
-    getAllSaved: '/db/get-all'
+    timelinesByUser: (userId) => `/db/timelines-by-user/${userId}`
 }
 
 export async function getSuggestions(params) {
@@ -51,9 +51,12 @@ export async function getSearchVolume({ query, country, dateRange }) {
 }
 
 
-export async function getAllSaved(){
-    const url = host + endpoints.getAllSaved
+export async function getAllSaved(nextPageToken){
+    let url = host + endpoints.getAllSaved
     const token = 5
+    if (nextPageToken){
+        url += `?pageState=${nextPageToken}` 
+    }
     return get(url, token)
 }
 
@@ -72,6 +75,12 @@ export async function postSuggestions(params){
     }
     
     return post(url, token, data)
+}
+
+
+export async function getTimelinesByUser(userId){
+    let url = host + endpoints.timelinesByUser(userId)
+    return get(url)
 }
 
 
