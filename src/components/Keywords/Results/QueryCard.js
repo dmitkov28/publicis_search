@@ -15,7 +15,6 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
-import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
 import { logos } from "../../../settings";
 import { useFetch } from "../../../hooks/useFetch";
 

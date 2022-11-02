@@ -70,7 +70,7 @@ export default function NavMenu() {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={logout}>  <Logout size='small' sx={{ mr: 1 }} /> Logout</MenuItem>
+                    <MenuItem onClick={logout}>  <Logout size='small' sx={{ mr: 1 }} /> Sign Out</MenuItem>
                     <MenuItem onClick={() => navigate('/reset-password')}>  <LockResetIcon size='small' sx={{ mr: 1 }} /> Reset password</MenuItem>
                 </Menu>
             </>
