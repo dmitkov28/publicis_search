@@ -1,10 +1,10 @@
 import SearchBox from './components/SearchBox';
 import ComparisonTimeline from './components/ComparisonTimeline';
-import ReportsTable from './components/ReportsTable';
+import TimelinesList from './components/TimelinesList';
 import Box from '@mui/material/Box';
 import { useParams } from 'react-router-dom';
 
-export default function SavedKeywords() {
+export default function Timelines() {
     const params = useParams()
 
     return (
@@ -12,9 +12,9 @@ export default function SavedKeywords() {
 
             {/* <SearchBox sx={{ my: 5 }} /> */}
             {/* <ComparisonTimeline /> */}
-            {params.keyword
+            {params.timelineId
                 ? <ComparisonTimeline />
-                : <ReportsTable />
+                : <TimelinesList />
             }
 
 

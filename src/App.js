@@ -7,7 +7,8 @@ import LoginPage from './pages/Login';
 import NotFound from './pages/NotFound';
 import ResetPassword from './pages/ResetPassword';
 import PrivateRoute from './components/RequireAuth';
-import SavedKeywords from './pages/SavedKeywords/SavedKeywords';
+import Timelines from './pages/SavedKeywords/Timelines';
+import EntryDetails from './pages/SavedKeywords/components/EntryDetails';
 
 function App() {
 
@@ -18,9 +19,9 @@ function App() {
         <Route path='/' element={<PrivateRoute />}>
           <Route path='/' element={<Navigation />}>
             <Route path='/explore-suggestions' element={<KeywordSearch />} />
-            <Route path='/saved-keywords' element={<SavedKeywords />} />
-            <Route path='/saved-keywords/:keyword/:platform' element={<SavedKeywords />} />
-            <Route path='/saved-keywords/:keyword/:platform/data' element={<SavedKeywords />} />
+            <Route path='/timelines' element={<Timelines />} />
+            <Route path='/timelines/:timelineId' element={<Timelines />} />
+            <Route path='/timelines/:timelineId/:entryId' element={<EntryDetails />} />
             <Route path='/search-trends' element={<SearchTrendsPage />} />
             <Route path='/use-cases' element={<About />} />
             <Route path='*' element={<NotFound />} />

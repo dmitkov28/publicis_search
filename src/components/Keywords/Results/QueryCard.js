@@ -20,7 +20,9 @@ import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { logos } from "../../../settings";
 import { useFetch } from "../../../hooks/useFetch";
-import { postSuggestions } from "../../../api/data";
+import { createTimeline } from "../../../api/data";
+import { auth } from "../../../firebase.config";
+
 
 export default function QueryCard() {
 
@@ -29,6 +31,8 @@ export default function QueryCard() {
 
     const { data: { query: { query, language, country, date, platform }, data } } = state
 
+    const userId = auth.currentUser.uid
+   
     const theme = useTheme()
     const isMd = useMediaQuery(theme.breakpoints.down('md'))
     const alignTitle = compareMode || isMd ? 'center' : 'flex-start'
@@ -37,9 +41,8 @@ export default function QueryCard() {
     const[isSaving, setIsSaving] = useState(false)
 
     const saveData = async () => {
-     
         setIsSaving(true)
-        await postSuggestions({ query, language, country, platform, data })
+        await createTimeline(userId, {query, language, country, platform, data })
         setIsSaving(false)
         setIsSaved(true)
     }

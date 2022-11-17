@@ -1,4 +1,4 @@
-import { get, post } from './api';
+import { del, get, post } from './api';
 import { auth } from '../firebase.config';
 import { env } from '../settings';
 
@@ -15,16 +15,16 @@ const endpoints = {
     getSuggestions: (platform, query) => `/${platform}/${query}`,
     getInstagramHashtags: (query) => `/instagram/${query}`,
     getSearchVolume: (query, country, dateRange) => `/search_volume/${query}/${country}/${dateRange}`,
-    timelinesByUser: (userId) => `/db/timelines-by-user/${userId}`
+    timelines: `timelines`,
+    createTimeline: `timelines`,
+    deleteTimeline: (timelineId) =>  `timelines/${timelineId}`,
 }
 
 export async function getSuggestions(params) {
-
     const { platform, query, country, language, freestyle } = params
-    const token = await auth.currentUser.getIdToken()
 
     if (platform == 'instagram') {
-        return get(host + endpoints.getInstagramHashtags(query), token)
+        return get(host + endpoints.getInstagramHashtags(query))
     }
 
     let url = host + endpoints.getSuggestions(platform, query)
@@ -41,26 +41,25 @@ export async function getSuggestions(params) {
         url += '?freestyle=true'
     }
 
-    return get(url, token)
+    return get(url)
 }
 
 export async function getSearchVolume({ query, country, dateRange }) {
     const url = host + endpoints.getSearchVolume(query, country, dateRange)
-    const token = 5
-    return get(url, token)
+    return get(url)
 }
 
 
-export async function getAllSaved(nextPageToken){
+export async function getAllSaved(nextPageToken) {
     let url = host + endpoints.getAllSaved
     const token = 5
-    if (nextPageToken){
-        url += `?pageState=${nextPageToken}` 
+    if (nextPageToken) {
+        url += `?pageState=${nextPageToken}`
     }
     return get(url, token)
 }
 
-export async function postSuggestions(params){
+export async function postSuggestions(params) {
     const { platform, query, country, language, data } = params
     const token = await auth.currentUser.getIdToken()
 
@@ -73,14 +72,21 @@ export async function postSuggestions(params){
     if (country && platform !== 'walmart' && platform !== 'target') {
         url += `/${country}`
     }
-    
+
     return post(url, token, data)
 }
 
 
-export async function getTimelinesByUser(userId){
-    let url = host + endpoints.timelinesByUser(userId)
-    return get(url)
+export async function createTimeline(data) {
+    data.keyword = data.query
+    delete data.query
+    let url = 'http://localhost:8080/api/' + endpoints.createTimeline
+    return post(url, data)
 }
 
+
+export async function deleteTimeline(timelineId){
+    let url = 'http://localhost:8080/api/' + endpoints.deleteTimeline(timelineId)
+    return del(url)
+}
 

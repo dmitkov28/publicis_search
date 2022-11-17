@@ -167,11 +167,11 @@ export default function Navigation() {
                                 </ListItemIcon>
                                 <ListItemText primary="Explore Suggestions" />
                             </ListItemButton>
-                            <ListItemButton sx={{ pl: 3 }} onClick={() => navigate('/saved-keywords')} selected={activePath === '/saved-keywords'}>
+                            <ListItemButton sx={{ pl: 3 }} onClick={() => navigate('/timelines')} selected={activePath === '/saved-keywords'}>
                                 <ListItemIcon>
                                     <FolderIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Saved Keywords" />
+                                <ListItemText primary="My Timelines" />
                             </ListItemButton>
                         </List>
                     </Collapse>

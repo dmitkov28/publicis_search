@@ -15,15 +15,18 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-
+import { useFetchFromDB } from '../../../hooks/useFetchFromDB';
+import { useEffect } from 'react';
 
 export default function ComparisonTimeline() {
-    const [params] = useSearchParams()
-    const country = params.get('country')
-    const language = params.get('language')
+    const { timelineId } = useParams()
+    const { isFetching, isError, data, getData } = useFetchFromDB()
+    useEffect(() => {
+        getData(`/timelines/${timelineId}`)
+    }, [])
+
 
     return (
         <Timeline
@@ -33,76 +36,41 @@ export default function ComparisonTimeline() {
                 },
             }}
         >
-            <TimelineItem>
-                <TimelineOppositeContent color="textSecondary">
-                    <Link
-                        to={'#'}
-                        style={{
-                            textDecoration: 'none',
-                        }}
-                    >
-                        <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'right' }}>
+            {
+                data &&
+                data.map(entry => {
+                    return (
+                        <TimelineItem>
+                            <TimelineOppositeContent color="textSecondary">
+                                <Link
+                                    to={`/timelines/${timelineId}/${entry.id}`}
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: '#2196f3',
+                                    }}
+                                >
+                                    <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'right' }}>
+                                        <CalendarMonthIcon sx={{ mr: 1 }} />
+                                        {new Date(entry.created).toLocaleDateString()}
+                                    </Typography>
+                                </Link>
+                            </TimelineOppositeContent>
+                            <TimelineSeparator>
+                                <TimelineDot />
+                                <TimelineConnector />
+                            </TimelineSeparator>
+                            <TimelineContent>
+                                <Paper sx={{ width: '70%', p: 3, display: 'flex', justifyContent: 'space-evenly' }} elevation={3}>
+                                    Started tracking keyword.
+                                </Paper>
 
-                            <CalendarMonthIcon sx={{ mr: 1 }} />
-                            16 Oct, 2022
+                            </TimelineContent>
+                        </TimelineItem>
+                    )
+                })
 
-                        </Typography>
-                    </Link>
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                    <TimelineDot />
-                    <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent>
-                    <Paper sx={{ width: '70%', p: 3, display: 'flex', justifyContent: 'space-evenly' }} elevation={3}>
-                        Started tracking keyword.
-                        {/* <List>
-                            <ListItem>
-                                <ListItemText
-                                    primary=
-                                    {<Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        Hellooo
-                                        <Chip sx={{ ml: 1 }} color='success' label='new' size='small' />
-                                    </Box>}>
-                                </ListItemText>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText
-                                    primary=
-                                    {<Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        Hellooo
-                                        <Chip sx={{ ml: 1 }} color='success' label='new' size='small' />
-                                    </Box>}>
-                                </ListItemText>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText
-                                    primary=
-                                    {<Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        Hellooo
-                                        <Chip sx={{ ml: 1 }} color='success' label='new' size='small' />
-                                    </Box>}>
-                                </ListItemText>
-                            </ListItem>
-                        </List> */}
-                        {/* <List>
-                            <ListItem>
-                                <ListItemText
-                                    primary=
-                                    {<Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        Hellooo
-                                        <Chip sx={{ ml: 1 }} color='error' label='gone' size='small' />
-                                    </Box>}>
+            }
 
-                                </ListItemText>
-                            </ListItem>
-
-
-                        </List> */}
-                    </Paper>
-
-                </TimelineContent>
-            </TimelineItem>
             <TimelineItem>
                 <TimelineOppositeContent color="textSecondary">
                     <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'right' }}>
@@ -161,66 +129,6 @@ export default function ComparisonTimeline() {
                         </List>
                     </Paper>
 
-                </TimelineContent>
-            </TimelineItem>
-            <TimelineItem>
-                <TimelineOppositeContent color="textSecondary">
-                    <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'right' }}>
-                        <CalendarMonthIcon sx={{ mr: 1 }} />
-                        19 Oct, 2022
-                    </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                    <TimelineDot />
-                    <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent>
-                    <Paper sx={{ width: '70%', p: 3, display: 'flex', justifyContent: 'space-evenly' }} elevation={3}>
-                        <List>
-                            <ListItem>
-                                <ListItemText
-                                    primary=
-                                    {<Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        nike discount code
-                                        <Chip sx={{ ml: 1 }} color='success' label='new' size='small' />
-                                    </Box>}>
-                                </ListItemText>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText
-                                    primary=
-                                    {<Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        nike without laces
-                                        <Chip sx={{ ml: 1 }} color='success' label='new' size='small' />
-                                    </Box>}>
-                                </ListItemText>
-                            </ListItem>
-                        </List>
-                        <List>
-                            <ListItem>
-                                <ListItemText
-                                    primary=
-                                    {<Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        nike logo
-                                        <Chip sx={{ ml: 1 }} color='error' label='gone' size='small' />
-                                    </Box>}>
-
-                                </ListItemText>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText
-                                    primary=
-                                    {<Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        nike tech fleece
-                                        <Chip sx={{ ml: 1 }} color='error' label='gone' size='small' />
-                                    </Box>}>
-
-                                </ListItemText>
-                            </ListItem>
-
-
-                        </List>
-                    </Paper>
                 </TimelineContent>
             </TimelineItem>
         </Timeline >
