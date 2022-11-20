@@ -175,15 +175,6 @@ export default function Navigation() {
                             </ListItemButton>
                         </List>
                     </Collapse>
-
-                    <ListItem disablePadding>
-                        <ListItemButton onClick={() => navigate('search-trends')} selected={activePath === '/search-trends'}>
-                            <ListItemIcon>
-                                <QueryStatsIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Search Trends" />
-                        </ListItemButton>
-                    </ListItem>
                     <ListItem disablePadding>
                         <ListItemButton onClick={() => navigate('use-cases')} selected={activePath === '/use-cases'}>
                             <ListItemIcon>
