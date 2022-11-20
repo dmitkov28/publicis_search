@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import KeywordSearch from './pages/KeywordSearch';
 import SearchTrendsPage from './pages/SearchTrends';
 import About from './pages/About';
@@ -10,6 +10,7 @@ import PrivateRoute from './components/RequireAuth';
 import Timelines from './pages/Timelines/Timelines';
 import EntryDetails from './pages/Timelines/components/EntryDetails';
 
+
 function App() {
 
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path='/' element={<PrivateRoute />}>
           <Route path='/' element={<Navigation />}>
+            <Route path='/' element={<Navigate to='/explore-suggestions'/>}/>
             <Route path='/explore-suggestions' element={<KeywordSearch />} />
             <Route path='/timelines' element={<Timelines />} />
             <Route path='/timelines/:timelineId' element={<Timelines />} />

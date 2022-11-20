@@ -7,8 +7,9 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent, {
     timelineOppositeContentClasses,
 } from '@mui/lab/TimelineOppositeContent';
-import { Paper } from '@mui/material';
 import List from '@mui/material/List';
+import Paper from '@mui/material/Paper';
+import CircularProgress from '@mui/material/CircularProgress';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Chip from '@mui/material/Chip';
@@ -19,12 +20,11 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useFetchFromDB } from '../../../hooks/useFetchFromDB';
 import { useEffect } from 'react';
-
 export default function ComparisonTimeline() {
     const { timelineId } = useParams()
     const { isFetching, isError, data, getData } = useFetchFromDB()
     useEffect(() => {
-        getData(`/timelines/${timelineId}`)
+        getData(`/datastore/timelines/${timelineId}`)
     }, [])
 
     return (
@@ -35,6 +35,14 @@ export default function ComparisonTimeline() {
                 },
             }}
         >
+            
+            {
+                    isFetching &&
+                    <Box sx={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
+                        <CircularProgress />
+                    </Box>
+                }
+
             {
                 data &&
                 <>

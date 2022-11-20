@@ -50,44 +50,17 @@ export async function getSearchVolume({ query, country, dateRange }) {
 }
 
 
-export async function getAllSaved(nextPageToken) {
-    let url = host + endpoints.getAllSaved
-    const token = 5
-    if (nextPageToken) {
-        url += `?pageState=${nextPageToken}`
-    }
-    return get(url, token)
-}
-
-export async function postSuggestions(params) {
-    const { platform, query, country, language, data } = params
-    const token = await auth.currentUser.getIdToken()
-
-    let url = host + endpoints.getSuggestions(platform, query)
-
-    if (language && platform !== 'walmart' && platform !== 'target' && platform !== 'amazon') {
-        url += `/${language}`
-    }
-
-    if (country && platform !== 'walmart' && platform !== 'target') {
-        url += `/${country}`
-    }
-
-    return post(url, token, data)
-}
-
 
 export async function createTimeline(data) {
-    console.log(data)
     data.keyword = data.query
     delete data.query
-    let url = 'http://localhost:8080/api/' + endpoints.createTimeline
+    let url = host + '/datastore/' + endpoints.createTimeline
     return post(url, data)
 }
 
 
 export async function deleteTimeline(timelineId){
-    let url = 'http://localhost:8080/api/' + endpoints.deleteTimeline(timelineId)
+    let url = host + '/datastore/' + endpoints.deleteTimeline(timelineId)
     return del(url)
 }
 

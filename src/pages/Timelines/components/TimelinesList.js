@@ -45,7 +45,7 @@ export default function TimelinesList() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getData('/timelines')
+        getData('/datastore/timelines')
     }, [])
 
     return (
@@ -63,9 +63,8 @@ export default function TimelinesList() {
                 }
 
                 {state.data && !isFetching && state.data.length == 0 &&
-                    <Box>
-
-                        <Typography variant='body' sx={{ p: 2 }}>No data.</Typography>
+                    <Box fullWidth>
+                        <Typography sx={{ p: 2}} textAlign='center'>No data.</Typography>
                     </Box>
                 }
 
@@ -76,7 +75,7 @@ export default function TimelinesList() {
                             state.data.map(item => {
                                 const timelineUrl = `/timelines/${item.id}`
                                 return (
-                                    <Box key={item.id}>
+                                    <Box key={item.id} >
                                         <ListItem>
                                             <ListItemText
                                                 sx={{

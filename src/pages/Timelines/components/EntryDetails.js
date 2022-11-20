@@ -19,7 +19,7 @@ export default function EntryDetails() {
     const isSm = useMediaQuery(theme.breakpoints.down('md'))
 
     useEffect(() => {
-        getData(`/timelines/${timelineId}/${entryId}`)
+        getData(`/datastore/timelines/${timelineId}/${entryId}`)
     }, [])
 
     return (

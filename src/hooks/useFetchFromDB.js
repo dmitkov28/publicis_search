@@ -13,7 +13,7 @@ export const useFetchFromDB = (dispatch) => {
     const userId = auth.currentUser.uid
     
     const hosts = {
-        'development': 'http://127.0.0.1:8080/api',
+        'development': 'http://127.0.0.1:8000/api',
         'production': 'https://36jlnk0mg2.execute-api.eu-central-1.amazonaws.com/production/api',
     }
     
@@ -41,7 +41,3 @@ export const useFetchFromDB = (dispatch) => {
     return { isFetching, isError, setIsError, data, getData, setData }
 }
 
-// export async function getTimelinesByUser(userId) {
-//     let url = 'http://localhost:8080/api/' + endpoints.timelines
-//     const token = await auth.currentUser.getIdToken()
-//     return get(url, token)
