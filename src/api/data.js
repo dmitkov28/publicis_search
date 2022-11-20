@@ -78,6 +78,7 @@ export async function postSuggestions(params) {
 
 
 export async function createTimeline(data) {
+    console.log(data)
     data.keyword = data.query
     delete data.query
     let url = 'http://localhost:8080/api/' + endpoints.createTimeline

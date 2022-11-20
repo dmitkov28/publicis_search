@@ -42,7 +42,7 @@ export default function QueryCard() {
 
     const saveData = async () => {
         setIsSaving(true)
-        await createTimeline(userId, {query, language, country, platform, data })
+        await createTimeline({query, language, country, platform, data })
         setIsSaving(false)
         setIsSaved(true)
     }

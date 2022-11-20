@@ -74,8 +74,9 @@ export default function TimelinesList() {
                     <List sx={{ width: '100%' }}>
                         {
                             state.data.map(item => {
+                                const timelineUrl = `/timelines/${item.id}`
                                 return (
-                                    <Box key={item.id} >
+                                    <Box key={item.id}>
                                         <ListItem>
                                             <ListItemText
                                                 sx={{
@@ -112,7 +113,6 @@ export default function TimelinesList() {
                                                     </Box>
                                                 } />
                                             <IconButton onClick={() => {
-                                                let timelineUrl = `/timelines/${item.id}`
                                                 navigate(timelineUrl)
                                             }}>
                                                 <TimelineIcon />

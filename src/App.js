@@ -7,8 +7,8 @@ import LoginPage from './pages/Login';
 import NotFound from './pages/NotFound';
 import ResetPassword from './pages/ResetPassword';
 import PrivateRoute from './components/RequireAuth';
-import Timelines from './pages/SavedKeywords/Timelines';
-import EntryDetails from './pages/SavedKeywords/components/EntryDetails';
+import Timelines from './pages/Timelines/Timelines';
+import EntryDetails from './pages/Timelines/components/EntryDetails';
 
 function App() {
 
