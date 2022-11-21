@@ -59,6 +59,7 @@ export default function About() {
                         <li><Link href='https://www.bennettinstitute.cam.ac.uk/blog/using-google-data-policy-research/'>Using Google data for policy research</Link> (Bennet Institute for Public Policy, 2019)</li>
                     </ul>
                 </Typography>
+                <Divider/>
             </Paper>
 
 
