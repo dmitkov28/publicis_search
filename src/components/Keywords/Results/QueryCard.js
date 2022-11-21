@@ -100,7 +100,6 @@ export default function QueryCard() {
 
     return (
         <Grid item xs={12} sx={{ mt: 5, position: 'relative' }}>
-
             <Paper
                 sx={{ maxWidth: '1100px', mx: 'auto', px: 3, py: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'baseline' }}
                 elevation={3}
