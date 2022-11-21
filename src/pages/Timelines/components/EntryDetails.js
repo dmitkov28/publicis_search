@@ -2,10 +2,14 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useFetchFromDB } from "../../../hooks/useFetchFromDB"
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTheme, useMediaQuery } from "@mui/material";
-
-
+import ResultCard from "../../../components/Keywords/Results/ResultCard";
+import Masonry  from "@mui/lab/Masonry";
 export default function EntryDetails() {
     const { timelineId, entryId } = useParams()
     const { isFetching, isError, data, getData } = useFetchFromDB()
@@ -16,7 +20,7 @@ export default function EntryDetails() {
     useEffect(() => {
         getData(`/datastore/timelines/${timelineId}/${entryId}`)
     }, [])
-
+    console.log(data)
     return (
         <>
             {
@@ -25,6 +29,7 @@ export default function EntryDetails() {
                     <CircularProgress />
                 </Box>
             }
+
             {data && JSON.stringify(data)}
         </>
     )

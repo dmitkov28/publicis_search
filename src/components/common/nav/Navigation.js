@@ -43,6 +43,21 @@ const openedMixin = (theme) => ({
     overflowX: 'hidden',
 });
 
+const newBadge = {
+    '&.MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-10hburv-MuiTypography-root::after': {
+        content: '"new"',
+        position: 'absolute',
+        fontSize: '9px',
+        borderRadius: '5px',
+        background: '#1976d2',
+        color: 'white',
+        fontWeight: 'bold',
+        padding: '0.2 0.8',
+        marginLeft: '5px',
+    }
+}
+
+
 const closedMixin = (theme) => ({
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -154,7 +169,7 @@ export default function Navigation() {
                 <List sx={{ pt: 0 }}>
                     <ListItemButton onClick={expandNestedItem} disableRipple>
                         <ListItemIcon>
-                            <ScreenSearchDesktop/>
+                            <ScreenSearchDesktop />
                         </ListItemIcon>
                         <ListItemText primary="Search Suggestions" />
                         {itemExpanded ? <ExpandLess /> : <ExpandMore />}
@@ -171,7 +186,20 @@ export default function Navigation() {
                                 <ListItemIcon>
                                     <FolderIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="My Timelines" />
+                                <ListItemText sx={{
+                                    '& .MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-10hburv-MuiTypography-root::after': {
+                                        content: '"new"',
+                                        position: 'absolute',
+                                        fontSize: '10px',
+                                        borderRadius: '5px',
+                                        background: '#1976d2',
+                                        color: 'white',
+                                        fontWeight: 'bold',
+                                        padding: '0.2em 0.8em',
+                                        marginLeft: '5px',
+                                    }
+
+                                }} primary="My Timelines" />
                             </ListItemButton>
                         </List>
                     </Collapse>

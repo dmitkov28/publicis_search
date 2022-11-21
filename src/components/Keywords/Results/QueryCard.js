@@ -19,7 +19,6 @@ import CheckIcon from '@mui/icons-material/Check';
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { logos } from "../../../settings";
-import { useFetch } from "../../../hooks/useFetch";
 import { createTimeline } from "../../../api/data";
 import { auth } from "../../../firebase.config";
 
