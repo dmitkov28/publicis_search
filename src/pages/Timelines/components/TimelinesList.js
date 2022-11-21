@@ -7,6 +7,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container';
+import Slide from '@mui/material/Slide';
+import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CalendarMonth from '@mui/icons-material/CalendarMonth';
@@ -61,6 +64,16 @@ export default function TimelinesList() {
                         <CircularProgress />
                     </Box>
                 }
+
+                {isError &&
+
+                    <Container sx={{ mt: 5, height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+                        <Slide direction="up" in={true} timeout={1200} mountOnEnter unmountOnExit>
+                            <Alert sx={{ width: '100%' }} severity="error">Something went wrong. Try again later.</Alert>
+                        </Slide>
+                    </Container>
+                }
+                
 
                 {state.data && !isFetching && state.data.length == 0 &&
                     <Box fullWidth>
