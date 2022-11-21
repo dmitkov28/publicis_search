@@ -138,7 +138,7 @@ export const tabs = [
         formFields: {
             freestyle: true,
         },
-        beta: true,
+        // beta: true,
 
     },
     {
@@ -149,7 +149,7 @@ export const tabs = [
         formFields: {
             freestyle: true,
         },
-        beta: true,
+        // beta: true,
 
     },
     {

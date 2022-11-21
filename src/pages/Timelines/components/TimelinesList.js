@@ -20,7 +20,7 @@ import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 
 export default function TimelinesList() {
-    
+
     const reducer = (state, action) => {
         switch (action.type) {
             case 'SET_DATA':
@@ -64,7 +64,7 @@ export default function TimelinesList() {
 
                 {state.data && !isFetching && state.data.length == 0 &&
                     <Box fullWidth>
-                        <Typography sx={{ p: 2}} textAlign='center'>No data.</Typography>
+                        <Typography sx={{ p: 2 }} textAlign='center'>No data.</Typography>
                     </Box>
                 }
 
@@ -116,7 +116,7 @@ export default function TimelinesList() {
                                             }}>
                                                 <TimelineIcon />
                                             </IconButton>
-                                            <IconButton onClick={()=>{
+                                            <IconButton onClick={() => {
                                                 setDeleteTimelineId(item.id)
                                                 setOpenModal(true)
                                             }}>
