@@ -22,7 +22,7 @@ export default function ResultCard({ modifier_type, modifier_keyword, suggestion
     }
 
     const { state, dispatch } = useContext(DataContext)
-
+ 
     const deleteCard = () => {
         dispatch({ type: 'SET_DATA', payload: {...state.data, data:{...state.data.data, [modifier_type]: { ...state.data.data[modifier_type], [modifier_keyword]: [] } }}})
     }

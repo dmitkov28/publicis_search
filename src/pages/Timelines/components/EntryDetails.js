@@ -8,8 +8,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTheme, useMediaQuery } from "@mui/material";
-import ResultCard from "../../../components/Keywords/Results/ResultCard";
-import Masonry  from "@mui/lab/Masonry";
+import DataViewer from "../../../components/common/Abs/DataViewer";
 export default function EntryDetails() {
     const { timelineId, entryId } = useParams()
     const { isFetching, isError, data, getData } = useFetchFromDB()
@@ -29,6 +28,7 @@ export default function EntryDetails() {
                     <CircularProgress />
                 </Box>
             }
+            <DataViewer />
 
             {data && JSON.stringify(data)}
         </>
