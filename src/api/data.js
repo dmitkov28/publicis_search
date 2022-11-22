@@ -1,4 +1,4 @@
-import { get } from './api';
+import { del, get, post } from './api';
 import { auth } from '../firebase.config';
 import { env } from '../settings';
 
@@ -14,16 +14,17 @@ const host = hosts[env]
 const endpoints = {
     getSuggestions: (platform, query) => `/${platform}/${query}`,
     getInstagramHashtags: (query) => `/instagram/${query}`,
-    getSearchVolume: (query, country, dateRange) => `/search_volume/${query}/${country}/${dateRange}`
+    getSearchVolume: (query, country, dateRange) => `/search_volume/${query}/${country}/${dateRange}`,
+    timelines: `timelines`,
+    createTimeline: `timelines`,
+    deleteTimeline: (timelineId) =>  `timelines/${timelineId}`,
 }
 
 export async function getSuggestions(params) {
-
     const { platform, query, country, language, freestyle } = params
-    const token = await auth.currentUser.getIdToken()
 
     if (platform == 'instagram') {
-        return get(host + endpoints.getInstagramHashtags(query), token)
+        return get(host + endpoints.getInstagramHashtags(query))
     }
 
     let url = host + endpoints.getSuggestions(platform, query)
@@ -40,12 +41,26 @@ export async function getSuggestions(params) {
         url += '?freestyle=true'
     }
 
-    return get(url, token)
+    return get(url)
 }
 
 export async function getSearchVolume({ query, country, dateRange }) {
     const url = host + endpoints.getSearchVolume(query, country, dateRange)
-    const token = 5
-    return get(url, token)
+    return get(url)
+}
+
+
+
+export async function createTimeline(data) {
+    data.keyword = data.query
+    delete data.query
+    let url = host + '/datastore/' + endpoints.createTimeline
+    return post(url, data)
+}
+
+
+export async function deleteTimeline(timelineId){
+    let url = host + '/datastore/' + endpoints.deleteTimeline(timelineId)
+    return del(url)
 }
 

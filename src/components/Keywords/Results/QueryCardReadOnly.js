@@ -25,11 +25,6 @@ import { auth } from "../../../firebase.config";
 
 export default function QueryCard() {
 
-    const { state } = useContext(DataContext)
-    const { compareMode } = useContext(CompareModeContext)
-
-    const { data: { query: { query, language, country, date, platform }, data } } = state
-
     const userId = auth.currentUser.uid
    
     const theme = useTheme()
@@ -153,13 +148,9 @@ export default function QueryCard() {
 
 
                     <Grid container sm={12} md={6} lg={compareMode ? 12 : 6} item spacing={1} sx={{ justifyContent: compareMode || isMd ? 'center' : 'flex-end' }}>
-                        {/* <Grid item >
-<<<<<<< HEAD
-                            <Button variant="outlined" size="small" startIcon={<TroubleshootIcon />}>Analyze</Button>
-=======
+                        <Grid item >
                             <Button variant="outlined" size="small" startIcon={<RemoveRedEyeIcon />}>Track</Button>
->>>>>>> timelines
-                        </Grid> */}
+                        </Grid>
                         <Grid item>
                             <CSVLink
                                 data={csvData.data}

@@ -8,10 +8,8 @@ import ImageIcon from '@mui/icons-material/Image';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DeleteIcon from '@mui/icons-material/Delete';
 import WordCloud from '../../WordCloud';
-import { useContext, useState } from 'react';
-import { DataContext } from '../SuggestionsFinder';
+import { useState } from 'react';
 import ListItem from './ListItem';
-import { CompareModeContext } from '../../../pages/KeywordSearch';
 import { Divider } from '@mui/material';
 
 
@@ -21,11 +19,6 @@ export default function ResultCard({ modifier_type, modifier_keyword, suggestion
         newValue != null && setView(newValue)
     }
 
-    const { state, dispatch } = useContext(DataContext)
- 
-    const deleteCard = () => {
-        dispatch({ type: 'SET_DATA', payload: {...state.data, data:{...state.data.data, [modifier_type]: { ...state.data.data[modifier_type], [modifier_keyword]: [] } }}})
-    }
 
     return (
         <Paper sx={{ p: 1 }}>
@@ -47,9 +40,6 @@ export default function ResultCard({ modifier_type, modifier_keyword, suggestion
                     </ToggleButton>
                     <ToggleButton value='list'>
                         <FormatListBulletedIcon />
-                    </ToggleButton>
-                    <ToggleButton value={true} onClick={deleteCard}>
-                        <DeleteIcon />
                     </ToggleButton>
                 </ToggleButtonGroup>
             </Box>

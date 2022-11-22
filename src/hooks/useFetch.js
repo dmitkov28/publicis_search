@@ -6,7 +6,6 @@ import { useCurrentQueryKey } from "./useCurrentQueryKey";
 export const useFetch = (state, dispatch) => {
     const [isFetching, setIsFetching] = useState(false)
     const [isError, setIsError] = useState(false)
-    const [isCached, setIsCached] = useState(false)
     const [data, setData] = useState(null)
     let { currentQueryKey } = useCurrentQueryKey(state)
     const { cache } = useContext(CompareModeContext)
@@ -15,7 +14,6 @@ export const useFetch = (state, dispatch) => {
     const getData = async (params) => {
         const { platform, form, freestyle, refetch } = params
         setIsFetching(true)
-        setIsCached(false)
         dispatch({ type: 'SET_DATA', payload: null })
 
         if (freestyle) {
@@ -25,7 +23,6 @@ export const useFetch = (state, dispatch) => {
         try {
             if (Object.keys(cache).includes(currentQueryKey) && !refetch) {
                 setData(cache[currentQueryKey])
-                setIsCached(true)
                 dispatch({ type: 'SET_DATA', payload: cache[currentQueryKey] })
                 return { isFetching, isError, setIsError, data, getData, setData }
             }
