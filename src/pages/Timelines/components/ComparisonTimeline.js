@@ -51,7 +51,8 @@ export default function ComparisonTimeline() {
                                 <TimelineItem key={entry.id}>
                                     <TimelineOppositeContent color="textSecondary">
                                         <Link
-                                            to={`/timelines/${timelineId}/${entry.id}`}
+                                            // to={`/timelines/${timelineId}/${entry.id}`}
+                                            to={'#'}
                                             style={{
                                                 textDecoration: 'none',
                                                 color: '#2196f3',
@@ -113,7 +114,8 @@ export default function ComparisonTimeline() {
                     <TimelineItem>
                         <TimelineOppositeContent color="textSecondary">
                             <Link
-                                to={`/timelines/${timelineId}/${data[0].id}`}
+                                // to={`/timelines/${timelineId}/${data[0].id}`}
+                                to={'#'}
                                 style={{
                                     textDecoration: 'none',
                                     color: '#2196f3',
