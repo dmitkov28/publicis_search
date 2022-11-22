@@ -153,9 +153,9 @@ export default function QueryCard() {
 
 
                     <Grid container sm={12} md={6} lg={compareMode ? 12 : 6} item spacing={1} sx={{ justifyContent: compareMode || isMd ? 'center' : 'flex-end' }}>
-                        <Grid item >
+                        {/* <Grid item >
                             <Button variant="outlined" size="small" startIcon={<RemoveRedEyeIcon />}>Track</Button>
-                        </Grid>
+                        </Grid> */}
                         <Grid item>
                             <CSVLink
                                 data={csvData.data}
